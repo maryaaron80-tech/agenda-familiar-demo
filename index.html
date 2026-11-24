@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda familiar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#3b6ea5">
+    <meta name="apple-mobile-web-app-title" content="Agenda">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+</head>
+<body class="sin-sesion">
+
+    <div class="fondo-animado" aria-hidden="true">
+        <span class="burbuja b1"></span>
+        <span class="burbuja b2"></span>
+        <span class="burbuja b3"></span>
+        <span class="burbuja b4"></span>
+        <span class="burbuja b5"></span>
+    </div>
+
+    
+<header class="cabecera">
+    <h1> 🏠Agenda familiar García López</h1>
+     <p class="fecha-hoy" id="fechaHoy"></p>
+     <p class="usuario" id="barraUsuario" hidden>
+        <span id="saludo"></span> · 
+        <button type="button" class="boton-enlace" id="botonPassword">Cambiar contraseña</button> ·
+        <button type="button" class="boton-enlace" id="botonSalir">Salir</button>
+         <button type="button" class="campana" id="botonCampana" title="Tablón familiar">🔔<span class="globo" id="globoAvisos" hidden></span> </button>
+    </p>   
+</header>
+
+<nav class="menu">
+    <button class="menu-boton activo" data-vista="hoy">Hoy</button>
+    <button class="menu-boton" data-vista="semana">Semana</button>
+    <button class="menu-boton" data-vista="mes">Mes</button>
+    <button class="menu-boton" data-vista="familia">Familia</button>
+    <button class="menu-boton" data-vista="resumen">Resumen</button>
+</nav>
+
+
+<main id="contenido">
+    <p class="vacio">Aquí aparecerán las tareas</p>
+</main>
+
+<button class="boton-nueva" id="botonNueva">+</button>
+
+
+<div class="fondo-modal" id="modal" hidden>
+   <div class="modal">
+   
+
+    <!--Pantalla 1: lista de tareas -->
+    <div id="pantallaLista">
+        <div class="cabecera-modal">
+            <h2>Gestionar tareas</h2>
+            <button type="button" class="boton-cerrar" id="botonCerrar" title="Cerrar">✕</button>
+        </div>
+
+        <button type="button" class="boton-principal boton-ancho" id="botonNuevaTarea">+ Nueva tarea</button>
+
+        <ul class="lista-gestion" id="listaGestion"></ul>
+
+    </div>
+
+    <!-- Pntalla 2: formulario -->
+     <form id="formTarea" hidden>
+        <h2 id="tituloForm">Nueva tarea</h2>
+
+        <label>Título
+            <input type="text" id="campoTitulo" required placeholder="Ej.: Regar las plantas">
+        </label>
+
+        <label>Frecuencia
+            <select id="campoFrecuencia">
+                <option value="diaria">Todos los días</option>
+                <option value="cadaNDias">Cada X días</option>
+                <option value="semanal">Una vez por semana (sábado)</option>
+                <option value="mensual">Una vez al mes (primer sábado)</option>
+            </select>
+        </label>
+
+        <label id="grupoCadaDias" hidden>Cada cuántos días
+            <input type="number" id="campoCadaDias" min="2" value="2">
+        </label>
+
+        <label>Reparto
+            <select id="campoReparto">
+                <option value="rotar">Por turnos (rotar)</option>
+                <option value="todos">Todos a la vez</option>
+            </select>
+        </label>
+
+        <fieldset>
+            <legend>Responsables</legend>
+            <div id="campoResponsables"></div>
+        </fieldset>
+
+        <p class="error-form" id="errorForm"></p>
+
+        <div class="botones-form">
+            <button type="button" class="boton-secundario" id="botonCancelar">Volver</button>
+            <button type="submit" class="boton-principal">Guardar</button>
+        </div>
+     </form>
+   </div>
+</div>
+
+
+<div class="fondo-modal" id="modalPassword" hidden>
+    <div class="modal">
+        <form class="form-password" id="formPassword">
+            <h2>Cambiar contraseña</h2>
+            
+            <label>Nueva contraseña
+                <input type="password" id="campoNuevaPassword" required minlength="8" autocomplete="new-password">
+            </label>
+
+            <label>Repite la contraseña
+                <input type="password" id="campoRepitePassword" required minlength="8" autocomplete="new-password">
+            </label>
+
+
+            <p class="error-form" id="errorPassword"></p>
+
+            <div class="botones-form">
+                <button type="button" class="boton-secundario" id="botonCancelarPassword">Cancelar</button>
+                <button type="submit" class="boton-principal">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="fondo-modal" id="modalTablon" hidden>
+   <div class="modal">
+       <div class="cabecera-modal"> 
+        <h2>Tablón familiar</h2>
+        <button type="button" class="boton-cerrar" id="botonCerrarTablon" title="Cerrar">✕</button>
+    </div>
+        <button type="button" class="boton-avisos-movil" id="botonActivarAvisos" hidden>📲 Activar avisos en este dispositivo</button>
+        <p class="pista-avisos" id="pistaAvisos" hidden>Para recibir avisos en el iPhone, instala la app: en Safari pulsa Compartir → Añadir a pantalla de inicio, y ábrela desde el icono.</p>
+
+
+    <div class="pestanas">
+        <button type="button" class="pestana activa" data-pestana="compra">🛒 Comprar</button>
+        <button type="button" class="pestana" data-pestana="aviso">📢 Avisos</button>
+        <button type="button" class="pestana" data-pestana="tarea">💬 Observaciones</button>
+    </div>
+
+    <ul class="lista-tablon" id="listaTablon"></ul>
+
+    <form class="form-tablon" id="formTablon">
+        <input type="text" id="campoNota" maxlength="300" required placeholder="¿Que falta? Ej.: aceite">
+        <button type="submit" class="boton-principal" id="botonNota">Añadir</button>
+    </form>
+   </div>
+</div>
+<div class="fondo-modal" id="modalFicha" hidden>
+    <div class="modal modal-ancha" id="contenidoFicha"></div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+
+
+  <div class="pantalla-login" id="pantallaLogin" hidden>
+    <h1 class="titulo-login">🏠 Agenda familiar<br>García López</h1>
+    
+    <form class="caja-login" id="formLogin">
+      <p class="subtitulo">Inicia sesión para ver tus tareas</p>
+
+      <label>Email
+        <input type="email" id="campoEmail" required autocomplete="email">
+      </label>
+
+      <label>Contraseña
+        <input type="password" id="campoPassword" required autocomplete="current-password">
+      </label>
+
+      <p class="error-form" id="errorLogin"></p>
+
+      <button type="submit" class="boton-principal">Entrar</button>
+    </form>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="demo.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
