@@ -2,7 +2,7 @@
 
 Web app para **repartir las tareas del hogar** entre los miembros de una familia. Cada persona tiene su cuenta, marca lo que hace desde el móvil y todos ven los cambios al momento. Incluye estadísticas, un tablón con la lista de la compra y avisos, y notificaciones en el móvil aunque la app esté cerrada.
 
-**▶️ Demo en vivo:** [ENLACE_DE_LA_DEMO](ENLACE_DE_LA_DEMO) · entra con cualquier email y contraseña.
+**▶️ Demo en vivo:** [maryaaron80-tech.github.io/agenda-familiar-demo](https://maryaaron80-tech.github.io/agenda-familiar-demo/) · entra con cualquier email y contraseña.
 
 > Esta es la versión pública del proyecto, con una familia ficticia (García López). La versión real la usa a diario mi familia, con sus propias cuentas.
 
